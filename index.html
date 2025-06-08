@@ -1,14 +1,97 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PBSC Wesel 1979 e.V. - Streamdeck</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Stream Control</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #222;
+        }
+        .button-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            background: rgba(0,0,0,0.7);
+        }
+        .scene-btn {
+            padding: 12px 20px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 4px;
+            background: #6441a5;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .scene-btn:hover {
+            background: #7d5bbe;
+        }
+        .status {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>1. PBSC Wesel 1979 e.V. - Streamdeck</h1>
+    <div class="status" id="status">Bereit</div>
+    
+    <div class="button-container">
+        <button class="scene-btn" data-scene="b3f8b34e-1e5f-4a7c-8e8a-1a1b1c1d1e1f">Start</button>
+        <button class="scene-btn" data-scene="a2e7a23d-0d4e-3b6b-7d7z-0z0y0x0w0v0u">Gameplay</button>
+        <button class="scene-btn" data-scene="c4g9c45f-2f6g-5c8d-9f9b-2b2a2z2y2x2w">Pause</button>
+        <button class="scene-btn" data-scene="d5h0d56g-3g7h-6e9f-0g0c-3c3b3a3z3y3x">Ende</button>
+    </div>
 
-    <script src="filter.js"></script>
+    <script>
+        const buttons = document.querySelectorAll('.scene-btn');
+        const statusEl = document.getElementById('status');
+        
+        // Aktuelle Szenen-IDs von deiner RTIRL-Seite
+        const sceneMap = {
+            "Start": "b3f8b34e-1e5f-4a7c-8e8a-1a1b1c1d1e1f",
+            "Gameplay": "a2e7a23d-0d4e-3b6b-7d7z-0z0y0x0w0v0u",
+            "Pause": "c4g9c45f-2f6g-5c8d-9f9b-2b2a2z2y2x2w",
+            "Ende": "d5h0d56g-3g7h-6e9f-0g0c-3c3b3a3z3y3x"
+        };
+
+        async function switchScene(sceneId) {
+            try {
+                statusEl.textContent = "Wechsle Szene...";
+                
+                const response = await fetch(`https://kit.rtirl.com/api/scenes/${sceneId}/activate`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    statusEl.textContent = "Szene gewechselt!";
+                    setTimeout(() => statusEl.textContent = "Bereit", 2000);
+                } else {
+                    statusEl.textContent = "Fehler beim Wechseln";
+                }
+            } catch (error) {
+                statusEl.textContent = "Verbindungsfehler";
+                console.error(error);
+            }
+        }
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const sceneId = button.dataset.scene;
+                switchScene(sceneId);
+            });
+        });
+    </script>
 </body>
 </html>
