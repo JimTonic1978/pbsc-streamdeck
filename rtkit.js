@@ -1,9 +1,24 @@
 // RealtimeKit WebSocket Client
 // by ChatGPT for PBSC Wesel
 
-const RTKIT_URL = "wss://kit.rtirl.com/socket.io/?EIO=4&transport=websocket";
+const RTKIT_ROOM_URL = "https://kit.rtirl.com/dbdd459b-aafe-4a55-adf2-795b547db572";
 
-let socket;
+// Connect via Socket.IO (!!!)
+console.log("Connecting to RealtimeKit via socket.io...");
+const socket = io(RTKIT_ROOM_URL);
+
+socket.on('connect', () => {
+    console.log("✅ Socket.IO connected!", socket.id);
+});
+
+socket.on('disconnect', (reason) => {
+    console.log("⚠️ Socket.IO disconnected:", reason);
+});
+
+socket.on('connect_error', (error) => {
+    console.error("❌ Socket.IO connection error:", error);
+});
+
 
 function connectSocket() {
     console.log("Connecting to RealtimeKit WebSocket...");
