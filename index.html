@@ -6,6 +6,8 @@
     <title>PBSC Wesel 1979 e.V. - Streamdeck</title>
     <link rel="stylesheet" href="style.css" />
     <script src="pw.js"></script>
+    <!-- WICHTIG: Socket.IO Client von RTKit laden -->
+    <script src="https://kit.rtirl.com/socket.io/socket.io.js"></script>
 </head>
 <body onload="checkPassword()">
     <h1>1. PBSC Wesel 1979 e.V. - Streamdeck</h1>
@@ -24,8 +26,7 @@
         <button class="stop" onclick="stopStreaming()">Stop Streaming</button>
     </div>
 
-     <script src="pw.js"></script>
-    <script src="https://kit.rtirl.com/socket.io/socket.io.js"></script>
+    <!-- FINALES rtkit.js laden -->
     <script src="rtkit.js"></script>
 </body>
 </html>
