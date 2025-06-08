@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PBSC Wesel 1979 e.V. - Streamdeck</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="pw.js"></script>
+</head>
+<body onload="checkPassword()">
+    <h1>1. PBSC Wesel 1979 e.V. - Streamdeck</h1>
+    <iframe id="rtkit-frame" src="" frameborder="0"></iframe>
+</body>
+<script>
+    // RTKIT_URL aus ENV ziehen (Vercel ersetzt es beim Deploy automatisch)
+    const rtkitUrl = process.env.RTKIT_URL || '';
+    document.getElementById('rtkit-frame').src = rtkitUrl;
+</script>
+</html>
