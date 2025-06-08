@@ -13,9 +13,9 @@ h1 {
 .iframe-container {
     position: relative;
     width: 100%;
-    max-width: 600px; /* DEIN Wunsch-Bereich */
+    max-width: 1200px;
     margin: 0 auto;
-    height: 400px; /* Höhe → NUR den Bereich mit den Buttons sichtbar! */
+    height: 500px; /* Höhe anpassen → Buttons gut sichtbar! */
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -23,12 +23,12 @@ h1 {
 
 .iframe-container iframe {
     position: absolute;
-    top: -300px; /* Y verschieben → Buttons sichtbar! */
-    left: -150px; /* X verschieben → Buttons sichtbar! */
-    width: 2000px; /* groß genug skalieren */
+    top: -550px; /* Y-Position → Buttons sichtbar! */
+    left: -150px; /* X-Position → Buttons mittig! */
+    width: 2000px;
     height: 2000px;
     border: none;
-    transform: scale(1.2); /* Zoom anpassen! */
+    transform: scale(1.6); /* Zoom → Buttons größer und lesbar! */
     transform-origin: top left;
     border-radius: 12px;
 }
