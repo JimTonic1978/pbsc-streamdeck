@@ -6,28 +6,16 @@
     <title>PBSC Wesel 1979 e.V. - Streamdeck</title>
     <link rel="stylesheet" href="style.css" />
     <script src="pw.js"></script>
-
-    <!-- WICHTIG: Original RTKit Client einbinden -->
-    <script src="https://kit.rtirl.com/assets/client.js"></script>
 </head>
 <body onload="checkPassword()">
     <h1>1. PBSC Wesel 1979 e.V. - Streamdeck</h1>
 
-    <div class="button-row">
-        <button onclick="switchScene('Tisch 4 - neu')">Tisch 4 - neu</button>
-        <button onclick="switchScene('Tisch 3 - neu')">Tisch 3 - neu</button>
-        <button onclick="switchScene('Tisch 5 - neu')">Tisch 5 - neu</button>
-        <button onclick="switchScene('Tisch 6 - neu')">Tisch 6 - neu</button>
-        <button onclick="switchScene('Alle Tische')">Alle Tische</button>
-        <button onclick="switchScene('Punkteübersicht')">Punkteübersicht</button>
+    <div class="iframe-container">
+        <iframe 
+            src="https://kit.rtirl.com/dbdd459b-aafe-4a55-adf2-795b547db572" 
+            frameborder="0" 
+            allowfullscreen>
+        </iframe>
     </div>
-
-    <div class="button-row spaced">
-        <button class="start" onclick="startStreaming()">Start Streaming</button>
-        <button class="stop" onclick="stopStreaming()">Stop Streaming</button>
-    </div>
-
-    <!-- DEIN rtkit.js bleibt → enthält die Aufrufe -->
-    <script src="rtkit.js"></script>
 </body>
 </html>
