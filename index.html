@@ -9,11 +9,6 @@
 </head>
 <body onload="checkPassword()">
     <h1>1. PBSC Wesel 1979 e.V. - Streamdeck</h1>
-    <iframe id="rtkit-frame" src="" frameborder="0"></iframe>
+    <iframe id="rtkit-frame" src="https://kit.rtirl.com/dbdd459b-aafe-4a55-adf2-795b547db572" frameborder="0"></iframe>
 </body>
-<script>
-    // RTKIT_URL aus ENV ziehen (Vercel ersetzt es beim Deploy automatisch)
-    const rtkitUrl = process.env.RTKIT_URL || '';
-    document.getElementById('rtkit-frame').src = rtkitUrl;
-</script>
 </html>
