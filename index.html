@@ -4,11 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>PBSC Wesel 1979 e.V. - Streamdeck</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="pw.js"></script>
 </head>
 <body onload="checkPassword()">
     <h1>1. PBSC Wesel 1979 e.V. - Streamdeck</h1>
-    <iframe id="rtkit-frame" src="https://kit.rtirl.com/dbdd459b-aafe-4a55-adf2-795b547db572" frameborder="0"></iframe>
+
+    <div class="button-row">
+        <button onclick="switchScene('Tisch 4 - neu')">Tisch 4 - neu</button>
+        <button onclick="switchScene('Tisch 3 - neu')">Tisch 3 - neu</button>
+        <button onclick="switchScene('Tisch 5 - neu')">Tisch 5 - neu</button>
+        <button onclick="switchScene('Tisch 6 - neu')">Tisch 6 - neu</button>
+        <button onclick="switchScene('Alle Tische')">Alle Tische</button>
+        <button onclick="switchScene('Punkteübersicht')">Punkteübersicht</button>
+    </div>
+
+    <div class="button-row spaced">
+        <button class="start" onclick="startStreaming()">Start Streaming</button>
+        <button class="stop" onclick="stopStreaming()">Stop Streaming</button>
+    </div>
+
+    <script>
+        const RTKIT_URL = "https://kit.rtirl.com/dbdd459b-aafe-4a55-adf2-795b547db572";
+
+        function switchScene(sceneName) {
+            fetch(`${RTKIT_URL}/api/scene`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: sceneName })
+            })
+            .then(response => console.log(`Scene switched to ${sceneName}`, response))
+            .catch(error => console.error('Error switching scene:', error));
+        }
+
+        function startStreaming() {
+            fetch(`${RTKIT_URL}/api/stream/start`, { method: 'POST' })
+            .then(response => console.log('Stream started', response))
+            .catch(error => console.error('Error starting stream:', error));
+        }
+
+        function stopStreaming() {
+            fetch(`${RTKIT_URL}/api/stream/stop`, { method: 'POST' })
+            .then(response => console.log('Stream stopped', response))
+            .catch(error => console.error('Error stopping stream:', error));
+        }
+    </script>
 </body>
 </html>
