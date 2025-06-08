@@ -1,20 +1,8 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: #f8f8f8;
-    padding: 20px;
-    margin: 0;
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
 .iframe-container {
     position: relative;
     width: 100%;
-    max-width: 800px;
-    height: 520px; /* Höhe exakt auf Switch Scenes + Start/Stop angepasst */
+    max-width: 1000px;
+    height: 520px; /* Oder 550px je nach Buttons */
     margin: 0 auto;
     overflow: hidden;
     border-radius: 12px;
@@ -24,11 +12,11 @@ h1 {
 
 .iframe-container iframe {
     position: absolute;
-    top: -670px; /* EXAKT getestet! */
+    top: -760px;  /* SAUBER getestet! */
     left: 0;
     width: 100%;
     height: 2000px;
     border: none;
-    transform: scale(1); /* kein Zoom → alles nativ → Buttons bleiben klickbar */
+    transform: scale(1);
     transform-origin: top left;
 }
