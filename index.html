@@ -2,7 +2,77 @@
 <html>
 <head>
     <title>Stream Control</title>
+    <meta name="viewport" content=<!DOCTYPE html>
+<html>
+<head>
+    <title>RTIRL Remote Control</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1e1e1e;
+            color: white;
+            margin: 0;
+            padding: 10px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: #6441a5;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        #status {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">RTIRL Remote</h2>
+    
+    <div id="status">Bereit</div>
+    
+    <button class="btn" onclick="switchScene('Tisch4_Start')">Tisch 4 Start</button>
+    <button class="btn" onclick="switchScene('Tisch4_Game')">Tisch 4 Game</button>
+    <button class="btn" onclick="switchScene('Tisch4_Pause')">Tisch 4 Pause</button>
+
+    <script>
+        async function switchScene(sceneName) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = "Wechsle Szene...";
+            
+            try {
+                // Korrekter API-Endpunkt für deine RTIRL-Instanz
+                const response = await fetch(`https://klt.rtirl.com/api/dbdd459b-aafe-4a55-adf2-795b547db572/setCurrentScene`, {
+                    method: 'POST',
+                    credentials: 'include',  // Cookies werden mitgesendet
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ sceneName })  // Wichtig: sceneName als JSON-Payload
+                });
+                
+                if (response.ok) {
+                    statusEl.textContent = "Szene gewechselt!";
+                    setTimeout(() => statusEl.textContent = "Bereit", 2000);
+                } else {
+                    statusEl.textContent = "Fehler: " + response.status;
+                }
+            } catch (error) {
+                statusEl.textContent = "Verbindungsfehler!";
+                console.error("Fehlerdetails:", error);
+            }
+        }
+    </script>
+</body>
+</html>"width=device-width, initial-scale=1">
     <style>
         body {
             margin: 0;
