@@ -24,32 +24,6 @@
         <button class="stop" onclick="stopStreaming()">Stop Streaming</button>
     </div>
 
-    <script>
-        const RTKIT_URL = "https://kit.rtirl.com/dbdd459b-aafe-4a55-adf2-795b547db572";
-
-        function switchScene(sceneName) {
-            fetch(`${RTKIT_URL}/api/scene`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name: sceneName })
-            })
-            .then(response => console.log(`Scene switched to ${sceneName}`, response))
-            .catch(error => console.error('Error switching scene:', error));
-        }
-
-        function startStreaming() {
-            fetch(`${RTKIT_URL}/api/stream/start`, { method: 'POST' })
-            .then(response => console.log('Stream started', response))
-            .catch(error => console.error('Error starting stream:', error));
-        }
-
-        function stopStreaming() {
-            fetch(`${RTKIT_URL}/api/stream/stop`, { method: 'POST' })
-            .then(response => console.log('Stream stopped', response))
-            .catch(error => console.error('Error stopping stream:', error));
-        }
-    </script>
+    <script src="rtkit.js"></script>
 </body>
 </html>
