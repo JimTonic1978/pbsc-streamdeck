@@ -1,36 +1,40 @@
-// RealtimeKit Socket.IO Client
+// RealtimeKit Client Wrapper
 // by ChatGPT for PBSC Wesel
 
-// WICHTIG: Hier deine RTKit Room URL → KEINE wss://, sondern normale URL!
+// WICHTIG: DEINE RTKit Room URL:
 const RTKIT_ROOM_URL = "https://kit.rtirl.com/dbdd459b-aafe-4a55-adf2-795b547db572";
 
-// Connect via Socket.IO
-console.log("Connecting to RealtimeKit via socket.io...");
-const socket = io(RTKIT_ROOM_URL);
+console.log("Connecting to RTKit Client:", RTKIT_ROOM_URL);
 
-socket.on('connect', () => {
-    console.log("✅ Socket.IO connected!", socket.id);
+// Client erzeugen
+const rtkit = RTKit.createClient({
+    url: RTKIT_ROOM_URL
 });
 
-socket.on('disconnect', (reason) => {
-    console.log("⚠️ Socket.IO disconnected:", reason);
+rtkit.on("connected", () => {
+    console.log("✅ RTKit client connected!");
 });
 
-socket.on('connect_error', (error) => {
-    console.error("❌ Socket.IO connection error:", error);
+rtkit.on("disconnected", () => {
+    console.log("⚠️ RTKit client disconnected!");
 });
 
+rtkit.on("error", (error) => {
+    console.error("❌ RTKit client error:", error);
+});
+
+// Button-Funktionen
 function switchScene(sceneName) {
     console.log("📤 Switching scene to:", sceneName);
-    socket.emit("SetCurrentScene", { name: sceneName });
+    rtkit.setCurrentScene(sceneName);
 }
 
 function startStreaming() {
     console.log("📤 Starting stream");
-    socket.emit("StartStreaming");
+    rtkit.startStreaming();
 }
 
 function stopStreaming() {
     console.log("📤 Stopping stream");
-    socket.emit("StopStreaming");
+    rtkit.stopStreaming();
 }
